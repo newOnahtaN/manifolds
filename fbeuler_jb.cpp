@@ -14,7 +14,7 @@ double dy(vec t, double x, double y){
   return pow((x-y),2) + y;
 }
 
-void fbeuler_jb( double x0, double T, double N, double tol, long maxiter){
+void fbeuler_jb( double x0, double T, long N, double tol, long maxiter){
   double h = (T+1)/N;
   //vector t = 0:h:T use span
   vec x = x0 * ones<vec>(5/*t.n_rows*/);
@@ -28,12 +28,12 @@ void fbeuler_jb( double x0, double T, double N, double tol, long maxiter){
   while ((m < maxiter) && max(norm(y-ylast), norm(x-xlast)) > tol){
     xlast = x;
     for (long i = 0; i < 5/*t.n_rows*/-1; i++ ){
-      x[i-1] = xlast[i] - h * dx(/*t*/,xlast[i],ylast[i]);
+      x(i-1) = xlast(i) - h * dx(/*t*/,xlast(i),ylast(i));
     }
 
     ylast = y;
     for (long i = 5/*t.n_rows*/-1; i > 0; i-- ){
-      y[i-1] = ylast[i] - h * dy(/*t*/,xlast[i],ylast[i]);
+      y(i-1) = ylast(i) - h * dy(/*t*/,xlast(i),ylast(i));
     }
 
     convInd[m] = max(norm(y-ylast), norm(x-xlast));
