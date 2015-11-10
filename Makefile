@@ -1,7 +1,7 @@
 test: test.cpp
 	g++ test.cpp -o test -O2 -larmadillo
 
-all: fbeuler_jb fbeuler_gs fbtrap_jb
+all: fbeuler_jb fbeuler_gs
 
 fbeuler_jb: fbeuler_jb.cpp
 	g++ fbeuler_jb.cpp -o fbeuler_jb -O2 -larmadillo
